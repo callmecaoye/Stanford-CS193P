@@ -22,8 +22,9 @@ class HappinessViewController: UIViewController, FaceViewDataSource {
         didSet {
             faceView.dataSource = self
             faceView.addGestureRecognizer(UIPinchGestureRecognizer(target: faceView, action: #selector(FaceView.scale)))
+            // modifies UI -> handled by View
             // faceView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.changeHapiness)))
-            // modifies the Model -> handled by controller
+            // modifies the Model -> handled by Controller
         }
     }
     

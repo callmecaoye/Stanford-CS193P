@@ -9,7 +9,7 @@
 import UIKit
 
 // delegate protocol
-protocol FaceViewDataSource: class { // can only implemented by class
+protocol FaceViewDataSource: class { // can only be implemented by class
     func smiliness4FaceView(sender: FaceView) -> Double?
 }
 

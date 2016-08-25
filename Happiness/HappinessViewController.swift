@@ -18,14 +18,18 @@ class HappinessViewController: UIViewController, FaceViewDataSource {
         }
     }
     
+    // Controller -> View, through outlet
     @IBOutlet weak var faceView: FaceView! {
         didSet {
             faceView.dataSource = self
             faceView.addGestureRecognizer(UIPinchGestureRecognizer(target: faceView, action: #selector(FaceView.scale)))
-            // modifies UI -> handled by View
             // faceView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.changeHapiness)))
-            // modifies the Model -> handled by Controller
+            // modifies the Model -> handled by controller
         }
+    }
+    
+    func updateUI() {
+        faceView.setNeedsDisplay() // redraw FaceView
     }
     
     private struct Constants {
@@ -38,21 +42,19 @@ class HappinessViewController: UIViewController, FaceViewDataSource {
         case .Ended: fallthrough
         case .Changed:
             let translation = gesture.translationInView(faceView)
+            
             // interpret input from View for Model
             let happinessChange = Int(translation.y / Constants.HappinessGestureScale)
             if (happiness != 0) {
                 happiness += happinessChange
                 gesture.setTranslation(CGPointZero, inView: faceView)
             }
+            
         default: break
         }
     }
     
-    func updateUI() {
-        faceView.setNeedsDisplay() // redraw FaceView
-    }
-    
-    // FaceViewDataSource
+    // FaceViewDataSource protocol method
     func smiliness4FaceView(sender: FaceView) -> Double? {
         // interpret Model for View
         return Double(happiness - 50) / 50

@@ -9,7 +9,7 @@
 import UIKit
 
 // delegate protocol
-protocol FaceViewDataSource: class { // can only be implemented by class
+protocol FaceViewDataSource: class { // can only implemented by class
     func smiliness4FaceView(sender: FaceView) -> Double?
 }
 
@@ -55,7 +55,7 @@ class FaceView: UIView {
         bezierPathForEye(.Left).stroke()
         bezierPathForEye(.Right).stroke()
         
-        // get from delegate 
+        // View -> Controller, get data through datasource delegate
         let smiliness = dataSource?.smiliness4FaceView(self) ?? 0.0 // nil -> 0.0
         let smilePath = bezierPathForSmile(smiliness)
         smilePath.stroke()
@@ -114,6 +114,4 @@ class FaceView: UIView {
         path.lineWidth = lineWidth
         return path
     }
-    
-
 }

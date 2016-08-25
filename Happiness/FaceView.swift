@@ -31,7 +31,7 @@ class FaceView: UIView {
         return min(bounds.size.width, bounds.size.height) / 2 * scale // var bounds is from UIView
     }
     
-    // delegate property
+    // protocol instance
     weak var dataSource: FaceViewDataSource? // weak is to avoid memory cycle
     
     // gesture handler for pinching
